@@ -1,0 +1,81 @@
+prompt_template = """
+Objective:
+You are simulating a panel of three experts evaluating code solutions for deep learning energy-efficiency patterns. Each expert will analyze the solutions from their specialized perspective and then vote on the overall energy efficiency.
+
+Task Description:
+As a panel of three experts, evaluate the two code solutions across eight energy-efficiency patterns:
+
+1. Pre-trained Model Utilization (transfer learning, knowledge distillation)
+2. Checkpoint Management (saving/loading model checkpoints efficiently)
+3. Model Pruning Strategies (removing unnecessary weights/neurons)
+4. Quantization Techniques (reducing precision of model parameters)
+5. Knowledge Distillation Use (training smaller models with larger model knowledge)
+6. Efficient Data Handling (optimized data loading, batching, preprocessing)
+7. Memory Management (GPU memory optimization, garbage collection)
+8. Optimized Tensor Operations (efficient matrix operations, vectorization)
+
+Expert Roles:
+- ML Optimization Expert: Focuses on model architecture, training efficiency, and algorithmic optimizations
+- Software Architecture Expert: Focuses on code structure, scalability, and maintainability aspects
+- Sustainability Expert: Focuses on energy consumption, resource usage, and environmental impact
+
+Additional Instructions:
+- Each expert should evaluate all 8 patterns for both solutions
+- Experts should highlight specific code snippets that demonstrate energy-efficient patterns
+- After individual evaluation, experts will vote on which solution is more energy-efficient
+- The final verdict is determined by majority vote
+- Be objective and evidence-based in assessments
+
+Reporting Instructions:
+Return ONLY a JSON object with this exact structure:
+{{
+  "SO_Pre-trained_Model_Utilization": "yes" or "no",
+  "SO_Checkpoint_Management": "yes" or "no",
+  "SO_Model_Pruning_Strategies": "yes" or "no",
+  "SO_Quantization_Techniques": "yes" or "no",
+  "SO_Knowledge_Distillation_Use": "yes" or "no",
+  "SO_Efficient_Data_Handling": "yes" or "no",
+  "SO_Memory_Management": "yes" or "no",
+  "SO_Optimized_Tensor_Operations": "yes" or "no",
+  "ChatGPT_Pre-trained_Model_Utilization": "yes" or "no",
+  "ChatGPT_Checkpoint_Management": "yes" or "no",
+  "ChatGPT_Model_Pruning_Strategies": "yes" or "no",
+  "ChatGPT_Quantization_Techniques": "yes" or "no",
+  "ChatGPT_Knowledge_Distillation_Use": "yes" or "no",
+  "ChatGPT_Efficient_Data_Handling": "yes" or "no",
+  "ChatGPT_Memory_Management": "yes" or "no",
+  "ChatGPT_Optimized_Tensor_Operations": "yes" or "no",
+  "ml_optimization_vote": "Human" or "AI",
+  "software_architecture_vote": "Human" or "AI",
+  "sustainability_vote": "Human" or "AI",
+  "majority_verdict": "Human" or "AI",
+  "rationale": "Brief explanation (3-4 lines) of majority decision with key patterns and code snippets that influenced the vote"
+}}
+
+Voting Process:
+1. ML Optimization Expert evaluates: Model architecture efficiency, training optimizations, algorithmic choices
+2. Software Architecture Expert evaluates: Code structure, maintainability, scalability of energy patterns
+3. Sustainability Expert evaluates: Overall energy impact, resource efficiency, environmental considerations
+4. Each expert casts their vote independently
+5. Majority decision determines final verdict
+
+Examples:
+Example voting scenario:
+- ML Optimization Expert: "AI" (due to better tensor operations and quantization)
+- Software Architecture Expert: "Human" (due to cleaner checkpoint management)
+- Sustainability Expert: "AI" (due to overall lower computational footprint)
+- Majority Verdict: "AI"
+- Rationale: "AI solution wins 2-1 due to superior quantization (`converter.optimizations = [tf.lite.Optimize.DEFAULT]`) and efficient data batching, despite Human's better checkpoint strategy"
+
+---
+Now evaluate the following as an expert panel:
+
+Question:
+{question}
+
+Human (Stack Overflow) Answer:
+{human_answer}
+
+AI (ChatGPT) Answer:
+{ai_answer}
+"""

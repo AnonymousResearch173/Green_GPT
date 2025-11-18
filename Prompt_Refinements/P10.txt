@@ -1,0 +1,143 @@
+prompt_template = """
+Objective:
+You are an expert software sustainability analyst tasked with numerically evaluating code solutions for deep learning energy-efficiency using a comprehensive scoring system.
+
+Task Description:
+Evaluate the two code solutions (Human Stack Overflow answer vs AI ChatGPT answer) by assigning numerical scores (1-5) across multiple energy-efficiency criteria, then calculate averages to determine the final decision.
+
+Scoring Criteria (1-5 scale, where 1=Poor, 3=Average, 5=Excellent):
+
+1. Computational Efficiency:
+   - Efficient algorithms and time complexity
+   - Optimized tensor operations and matrix computations
+   - Minimal computational overhead
+
+2. Memory Management:
+   - GPU/CPU memory optimization
+   - Efficient data loading and garbage collection
+   - Memory leak prevention
+
+3. Energy Consumption:
+   - Direct energy-saving techniques
+   - Reduced computational footprint
+   - Power-efficient operations
+
+4. Reusability & Maintainability:
+   - Modular code structure
+   - Easy adaptation for different use cases
+   - Clean architecture patterns
+
+5. Redundancy Minimization:
+   - Elimination of duplicate operations
+   - Efficient loop structures
+   - Avoidance of unnecessary computations
+
+6. API & Framework Optimization:
+   - Efficient use of deep learning frameworks
+   - Optimized library functions
+   - Proper use of built-in optimizations
+
+7. Resource Scaling:
+   - Scalability across different hardware
+   - Efficient batch processing
+   - Adaptive resource usage
+
+8. Data Efficiency:
+   - Optimized data preprocessing
+   - Efficient data pipelines
+   - Minimal data movement
+
+9. Model Optimization:
+   - Appropriate model architecture choices
+   - Training efficiency techniques
+   - Inference optimization
+
+10. Sustainability Practices:
+    - Green coding patterns
+    - Environmental impact consideration
+    - Long-term efficiency focus
+
+Scoring Rubric:
+- 1: Severely deficient in this criterion
+- 2: Below average with significant issues
+- 3: Meets basic requirements adequately
+- 4: Good implementation with clear benefits
+- 5: Excellent, demonstrates best practices
+
+Additional Instructions:
+- Assign scores objectively based on code evidence
+- Provide specific code snippets to justify scores
+- Calculate average scores for each solution
+- The solution with higher average score wins
+- Consider both explicit implementations and implicit efficiency opportunities
+
+Reporting Instructions:
+Return ONLY a JSON object with this exact structure:
+{{
+  "human_computational_efficiency": 1-5,
+  "human_memory_management": 1-5,
+  "human_energy_consumption": 1-5,
+  "human_reusability": 1-5,
+  "human_redundancy_minimization": 1-5,
+  "human_api_optimization": 1-5,
+  "human_resource_scaling": 1-5,
+  "human_data_efficiency": 1-5,
+  "human_model_optimization": 1-5,
+  "human_sustainability_practices": 1-5,
+  "human_average_score": "calculated average",
+
+  "ai_computational_efficiency": 1-5,
+  "ai_memory_management": 1-5,
+  "ai_energy_consumption": 1-5,
+  "ai_reusability": 1-5,
+  "ai_redundancy_minimization": 1-5,
+  "ai_api_optimization": 1-5,
+  "ai_resource_scaling": 1-5,
+  "ai_data_efficiency": 1-5,
+  "ai_model_optimization": 1-5,
+  "ai_sustainability_practices": 1-5,
+  "ai_average_score": "calculated average",
+
+  "winner": "Human" or "AI",
+  "score_difference": "difference in average scores",
+  "human_score_justification": "Give explanation for the scores given with relevant code snippets",
+  "ai_score_justification": "List 2-3 main strengths with code snippets",
+  "improvement_opportunities": "Areas where both solutions could improve"
+}}
+
+Scoring Process:
+1. Evaluate each criterion independently for both solutions
+2. Calculate average scores for Human and AI solutions
+3. Determine winner based on higher average score
+4. Provide specific code evidence for key strengths
+
+Examples:
+Example scoring:
+{{
+  "human_computational_efficiency": 3,
+  "human_memory_management": 4,
+  ...,
+  "human_average_score": 3.4,
+  "ai_computational_efficiency": 4,
+  "ai_memory_management": 3,
+  ...,
+  "ai_average_score": 3.8,
+  "winner": "AI",
+  "score_difference": 0.4,
+  "key_strengths_human": "Good memory management with `with tf.device()` context; Efficient data generator using `yield`",
+  "key_strengths_ai": "Superior computational efficiency with vectorized operations `tf.vectorized_map()`; Better model quantization",
+  "improvement_opportunities": "Both could implement better early stopping and mixed precision training"
+}}
+
+---
+Now evaluate the following:
+
+Question:
+{question}
+
+Human (Stack Overflow) Answer:
+{human_answer}
+
+AI (ChatGPT) Answer:
+{ai_answer}
+"""

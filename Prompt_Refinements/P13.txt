@@ -1,0 +1,68 @@
+You will compare two solutions (Human vs AI) for energy efficiency using the 8-pattern scoring scheme.  
+Each pattern receives a score from 1–5 based on implementation strength.  
+Use code evidence first; textual clarity second.  
+Reward explicit tactics (T1–T30).  
+Compute averages and determine the winner.
+
+Eight Evaluation Patterns:
+1. Pre-trained models  
+2. Checkpoints  
+3. Optimization + pruning  
+4. Quantization  
+5. Data handling  
+6. Memory management  
+7. Algorithmic efficiency  
+8. Maintenance & adaptation
+
+Winner Rules:
+Higher average wins.  
+Exact 0.0 → Tie.  
+Small differences (<0.2) may be Tie only if justified through complementary strengths.
+
+Output:
+Return ONLY this JSON object:
+{
+  "human_pattern_1_score": 1-5,
+  ...
+  "ai_pattern_8_score": 1-5,
+  "human_average_score": "...",
+  "ai_average_score": "...",
+  "score_difference": "...",
+  "winner": "Human" or "AI" or "Tie",
+  "analysis_explanation": "..."
+}
+
+Example Output:
+{
+  "human_pattern_1_score": 4,
+  "human_pattern_2_score": 2,
+  "human_pattern_3_score": 3,
+  "human_pattern_4_score": 1,
+  "human_pattern_5_score": 4,
+  "human_pattern_6_score": 3,
+  "human_pattern_7_score": 3,
+  "human_pattern_8_score": 2,
+  "ai_pattern_1_score": 3,
+  "ai_pattern_2_score": 4,
+  "ai_pattern_3_score": 3,
+  "ai_pattern_4_score": 5,
+  "ai_pattern_5_score": 3,
+  "ai_pattern_6_score": 4,
+  "ai_pattern_7_score": 4,
+  "ai_pattern_8_score": 5,
+  "human_average_score": 2.75,
+  "ai_average_score": 3.875,
+  "score_difference": 1.125,
+  "winner": "AI",
+  "analysis_explanation": "AI demonstrates strong quantization and maintenance optimizations absent in the Human answer."
+}
+
+Now analyze:
+Question:
+{question}
+
+Human Answer:
+{human_answer}
+
+AI Answer:
+{ai_answer}

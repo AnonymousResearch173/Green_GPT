@@ -1,0 +1,83 @@
+prompt_template = """
+Objective:
+You are an expert software sustainability analyst. Your task is to evaluate two code solutions for energy efficiency using a structured chain-of-thought reasoning process.
+
+Task Description:
+Follow this exact chain-of-thought process to analyze the solutions:
+
+STEP 1: UNDERSTAND THE PROBLEM CONTEXT
+- Analyze the Stack Overflow question to understand the specific deep learning task
+- Identify what aspects of energy efficiency are most relevant for this particular problem
+- Determine the key performance metrics that matter for energy evaluation in this context
+
+STEP 2: DEFINE EVALUATION STRATEGY
+- Based on the problem context, define specific parameters or metrics for energy efficiency evaluation
+- Consider: computational complexity, memory usage, training time, inference efficiency, resource utilization
+- Identify which energy-efficiency patterns (from the 8-pattern framework) are most relevant
+
+STEP 3: ANALYZE HUMAN SOLUTION
+- Examine the Stack Overflow (Human) answer systematically
+- Evaluate against your defined evaluation parameters
+- Identify implemented energy-efficiency tactics with specific code evidence
+- Note strengths and weaknesses in energy optimization
+
+STEP 4: ANALYZE AI SOLUTION
+- Examine the ChatGPT (AI) answer systematically
+- Evaluate against the same defined parameters
+- Identify implemented energy-efficiency tactics with specific code evidence
+- Note strengths and weaknesses in energy optimization
+
+STEP 5: COMPARATIVE JUDGMENT
+- Compare both solutions against your evaluation framework
+- Determine which solution demonstrates better energy efficiency practices
+- Provide specific reasoning with code evidence
+- Consider trade-offs and practical implications
+
+Additional Instructions:
+- Be systematic and thorough in your step-by-step analysis
+- Provide concrete code snippets as evidence for all claims
+- Consider both immediate and long-term energy impacts
+- Evaluate the practicality and effectiveness of each approach
+
+Reporting Instructions:
+Return ONLY a JSON object with this exact structure:
+{{
+  "problem_analysis": "Brief description of the problem context and energy efficiency relevance (2-3 lines)",
+  "evaluation_strategy": "Specific parameters/metrics defined for energy evaluation in this context (3-4 lines)",
+  "comparative_judgment": "Direct comparison and final verdict with specific reasoning (4-5 lines)",
+  "key_evidence_human": "2-3 most impactful code snippets from Human solution with energy efficiency explanation",
+  "key_evidence_ai": "2-3 most impactful code snippets from AI solution with energy efficiency explanation",
+  "energy_efficiency_winner": "Human" or "AI",
+  "confidence_reasoning": "Explanation of why this judgment is reliable based on the evidence"
+}}
+
+Chain of Thought Process:
+1. First, understand what makes this specific problem energy-relevant
+2. Then, define how to measure energy efficiency for this context
+3. Systematically evaluate each solution against those metrics
+4. Finally, make evidence-based comparative judgment
+
+Examples:
+Example output:
+{{
+  "problem_analysis": "This question involves training an image classifier on limited hardware. Energy efficiency is critical due to computational constraints and potential deployment on edge devices.",
+  "evaluation_strategy": "Focus on: model inference speed, memory footprint during training, efficient data loading, and quantization readiness for deployment.",
+  "comparative_judgment": "AI solution wins due to comprehensive memory optimization and quantization readiness, despite Human's better base model choice. The data pipeline efficiency gives AI significant energy savings during training.",
+  "key_evidence_human": "base_model = tf.keras.applications.MobileNetV2(weights='imagenet') - Transfer learning reduces training energy; for img in images: processed.append(process(img)) - Inefficient manual data loading increases memory usage",
+  "key_evidence_ai": "policy = tf.keras.mixed_precision.Policy('mixed_float16') - Mixed precision reduces GPU memory by 40%; dataset = tf.data.Dataset.from_tensor_slices().batch(32).prefetch(2) - Optimized pipeline minimizes CPU-GPU idle time",
+  "energy_efficiency_winner": "AI",
+  "confidence_reasoning": "High confidence - clear quantitative advantages in memory usage and pipeline efficiency demonstrated through specific implementation choices"
+}}
+
+---
+Now evaluate the following using chain-of-thought reasoning:
+
+Question:
+{question}
+
+Human (Stack Overflow) Answer:
+{human_answer}
+
+AI (ChatGPT) Answer:
+{ai_answer}
+"""

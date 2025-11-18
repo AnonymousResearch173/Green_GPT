@@ -1,0 +1,145 @@
+prompt_template = """
+Objective:
+You are an expert software sustainability analyst tasked with numerically evaluating code solutions for deep learning energy-efficiency using the eight established energy-efficiency patterns.
+
+Task Description:
+Evaluate the two code solutions (Human Stack Overflow answer vs AI ChatGPT answer) by assigning numerical scores (1-5) across the eight core energy-efficiency patterns, then calculate averages to determine the final decision.
+
+Scoring Criteria (1-5 scale, where 1=Poor, 3=Average, 5=Excellent):
+
+1. Pre-trained Model Utilization:
+   - Use of transfer learning from pre-trained models
+   - Knowledge distillation implementation
+   - Leveraging existing model knowledge
+
+2. Checkpoint Management:
+   - Efficient saving/loading of model checkpoints
+   - Resume training capabilities
+   - Storage optimization for checkpoints
+
+3. Model Pruning Strategies:
+   - Removal of unnecessary weights/neurons
+   - Structured/unstructured pruning techniques
+   - Maintaining accuracy while reducing model size
+
+4. Quantization Techniques:
+   - Reducing precision of model parameters (FP16, INT8)
+   - Post-training quantization
+   - Quantization-aware training
+
+5. Knowledge Distillation Use:
+   - Training smaller student models with larger teacher models
+   - Distillation loss implementation
+   - Efficient model compression
+
+6. Efficient Data Handling:
+   - Optimized data loading pipelines
+   - Smart batching strategies
+   - Efficient data preprocessing and augmentation
+
+7. Memory Management:
+   - GPU/CPU memory optimization
+   - Efficient garbage collection
+   - Memory leak prevention
+   - Context-aware memory usage
+
+8. Optimized Tensor Operations:
+   - Efficient matrix operations and vectorization
+   - Proper use of broadcasting
+   - Minimized operation fusion
+   - Hardware-optimized computations
+
+Scoring Rubric:
+- 1: Pattern not implemented or severely deficient
+- 2: Basic implementation with significant issues
+- 3: Adequate implementation meeting basic requirements
+- 4: Good implementation with clear energy benefits
+- 5: Excellent implementation demonstrating best practices
+
+Additional Instructions:
+- Assign scores objectively based on code evidence
+- Provide specific code snippets to justify scores
+- Calculate average scores for each solution
+- The solution with higher average score wins
+- Consider both explicit implementations and implicit opportunities
+- If a pattern is not applicable to the problem context, score based on potential implementation
+
+Reporting Instructions:
+Return ONLY a JSON object with this exact structure:
+{{
+  "human_pretrained_model_utilization": 1-5,
+  "human_checkpoint_management": 1-5,
+  "human_model_pruning_strategies": 1-5,
+  "human_quantization_techniques": 1-5,
+  "human_knowledge_distillation_use": 1-5,
+  "human_efficient_data_handling": 1-5,
+  "human_memory_management": 1-5,
+  "human_optimized_tensor_operations": 1-5,
+  "human_average_score": "calculated average",
+
+  "ai_pretrained_model_utilization": 1-5,
+  "ai_checkpoint_management": 1-5,
+  "ai_model_pruning_strategies": 1-5,
+  "ai_quantization_techniques": 1-5,
+  "ai_knowledge_distillation_use": 1-5,
+  "ai_efficient_data_handling": 1-5,
+  "ai_memory_management": 1-5,
+  "ai_optimized_tensor_operations": 1-5,
+  "ai_average_score": "calculated average",
+
+  "winner": "Human" or "AI",
+  "score_difference": "difference in average scores",
+  "top_strengths_human": "List 2-3 highest scoring patterns with code snippets and scores",
+  "top_strengths_ai": "List 2-3 highest scoring patterns with code snippets and scores",
+  "major_improvement_areas": "Patterns with lowest scores that need improvement for both solutions"
+}}
+
+Scoring Process:
+1. Evaluate each of the 8 patterns independently for both solutions
+2. Calculate average scores for Human and AI solutions
+3. Determine winner based on higher average score
+4. Identify top strengths with specific code evidence
+5. Highlight major improvement opportunities
+
+Examples:
+Example scoring:
+{{
+  "human_pretrained_model_utilization": 4,
+  "human_checkpoint_management": 3,
+  "human_model_pruning_strategies": 2,
+  "human_quantization_techniques": 1,
+  "human_knowledge_distillation_use": 2,
+  "human_efficient_data_handling": 4,
+  "human_memory_management": 3,
+  "human_optimized_tensor_operations": 3,
+  "human_average_score": 2.75,
+
+  "ai_pretrained_model_utilization": 3,
+  "ai_checkpoint_management": 4,
+  "ai_model_pruning_strategies": 3,
+  "ai_quantization_techniques": 4,
+  "ai_knowledge_distillation_use": 2,
+  "ai_efficient_data_handling": 3,
+  "ai_memory_management": 4,
+  "ai_optimized_tensor_operations": 4,
+  "ai_average_score": 3.375,
+
+  "winner": "AI",
+  "score_difference": 0.625,
+  "top_strengths_human": "Pre-trained Model Utilization (4): Using MobileNetV2 with `weights='imagenet'`; Efficient Data Handling (4): Custom data generator with smart batching",
+  "top_strengths_ai": "Quantization Techniques (4): `tf.lite.Optimize.DEFAULT` implementation; Optimized Tensor Operations (4): Vectorized ops with `tf.vectorized_map()`",
+  "major_improvement_areas": "Both solutions weak in Knowledge Distillation; Human solution needs quantization; AI solution could improve pre-trained model usage"
+}}
+
+---
+Now evaluate the following:
+
+Question:
+{question}
+
+Human (Stack Overflow) Answer:
+{human_answer}
+
+AI (ChatGPT) Answer:
+{ai_answer}
+"""

@@ -1,0 +1,64 @@
+prompt_template = """
+Objective:
+You are simulating a panel of three experts evaluating code solutions for deep learning energy-efficiency. Each expert will freely analyze the solutions from their specialized perspective and then vote on the overall energy efficiency.
+
+Task Description:
+As a panel of three experts, conduct independent evaluations of the two code solutions (Human Stack Overflow answer vs AI ChatGPT answer) focusing on energy efficiency aspects without being constrained by predefined patterns.
+
+Expert Roles and Focus Areas:
+- ML Optimization Expert: Focuses on model architecture efficiency, training optimizations, algorithmic choices, computational complexity, and performance improvements
+- Software Architecture Expert: Focuses on code structure, scalability, maintainability, resource management, and system-level efficiency
+- Sustainability Expert: Focuses on energy consumption, computational resource usage, environmental impact, and green coding practices
+
+Additional Instructions:
+- Each expert should conduct independent analysis without predefined pattern constraints
+- Experts should identify and highlight the most relevant energy-efficiency aspects they observe
+- Experts must provide specific code snippets that support their evaluation
+- After individual analysis, each expert will cast their vote with a brief explanation
+- The final verdict is determined by majority vote
+
+Reporting Instructions:
+Return ONLY a JSON object with this exact structure:
+{{
+  "ml_optimization_vote": "Human" or "AI",
+  "ml_optimization_rationale": "Brief explanation from ML Optimization Expert with specific code snippets",
+  "software_architecture_vote": "Human" or "AI",
+  "software_architecture_rationale": "Brief explanation from Software Architecture Expert with specific code snippets",
+  "sustainability_vote": "Human" or "AI",
+  "sustainability_rationale": "Brief explanation from Sustainability Expert with specific code snippets",
+  "majority_verdict": "Human" or "AI",
+  "overall_rationale": "Brief summary of majority decision and key factors that influenced the outcome"
+}}
+
+Voting Process:
+1. ML Optimization Expert: Analyzes computational efficiency, model optimizations, training strategies
+2. Software Architecture Expert: Analyzes code quality, resource management, system efficiency
+3. Sustainability Expert: Analyzes energy impact, resource usage, environmental considerations
+4. Each expert provides vote with rationale including relevant code snippets
+5. Majority decision determines final verdict
+
+Examples:
+Example output:
+{{
+  "ml_optimization_vote": "AI",
+  "ml_optimization_rationale": "AI solution implements efficient batch normalization (`BatchNormalization()`) and uses Adam optimizer with learning rate scheduling, while Human solution uses basic SGD",
+  "software_architecture_vote": "Human",
+  "software_architecture_rationale": "Human solution demonstrates better memory management with explicit garbage collection (`gc.collect()`) and context managers for resource cleanup",
+  "sustainability_vote": "AI",
+  "sustainability_rationale": "AI solution reduces energy consumption through early stopping callbacks (`EarlyStopping(patience=3)`) and mixed precision training",
+  "majority_verdict": "AI",
+  "overall_rationale": "AI solution wins 2-1 due to superior training optimizations and energy-saving techniques, despite Human's better memory management"
+}}
+
+---
+Now evaluate the following as an expert panel:
+
+Question:
+{question}
+
+Human (Stack Overflow) Answer:
+{human_answer}
+
+AI (ChatGPT) Answer:
+{ai_answer}
+"""
