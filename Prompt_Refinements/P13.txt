@@ -14,6 +14,48 @@ Eight Evaluation Patterns:
 7. Algorithmic efficiency  
 8. Maintenance & adaptation
 
+Tactics to evaluate: 
+
+Data Management Tactics:
+T1: Apply sampling techniques - Use data sampling to reduce dataset size
+T2: Remove redundant data - Eliminate duplicate or unnecessary data points
+T3: Reduce the number of data features - Feature selection/dimensionality reduction
+T4: Use input quantization - Reduce precision of input data
+T5: Use data projection - Project data to lower dimensions
+T27: Minimize referencing to data - Optimize data access patterns
+
+Algorithm Selection Tactics:
+T6: Choose an energy-efficient algorithm - Select algorithms with lower computational complexity
+T7: Choose a lightweight algorithm alternative - Use simpler model architectures
+T8: Decrease model complexity - Reduce layers, parameters, or connections
+T9: Consider reinforcement learning for energy efficiency - Use RL for energy optimization
+T10: Use dynamic parameter adaptation - Adjust parameters based on context
+T11: Use built-in library functions - Leverage optimized framework functions
+
+Model Optimization Tactics:
+T12: Set energy consumption as a model constraint - Include energy in loss function
+T13: Consider graph substitution - Replace computational graph components
+T14: Enhance model sparsity - Increase zero-valued parameters
+T15: Consider energy-aware pruning - Remove components based on energy impact
+T16: Consider transfer learning - Use pre-trained models
+T17: Consider knowledge distillation - Train small models from large ones
+T18: Use quantization-aware training - Train with quantization constraints
+T19: Use checkpoints during training - Save/restore training progress
+
+System Architecture Tactics:
+T20: Design for memory constraints - Optimize for limited memory
+T21: Consider federated learning - Distributed training approach
+T22: Use computation partitioning - Split computation across devices
+T23: Apply cloud fog network architecture - Edge computing distribution
+T24: Use energy-efficient hardware - Hardware-specific optimizations
+T25: Use power capping - Limit power consumption
+T26: Use energy-aware scheduling - Smart resource allocation
+
+Adaptation & Monitoring Tactics:
+T28: Use informed adaptation - Adapt based on system state
+T29: Retrain the model if needed - Continuous improvement cycles
+T30: Monitor computing power - Track energy consumption metrics
+
 Winner Rules:
 Higher average wins.  
 Exact 0.0 → Tie.  
