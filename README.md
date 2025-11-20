@@ -55,11 +55,9 @@ This includes correlation tests and significance analyses to understand the agre
 
 ### **5. exploratory_freeform_analysis.pdf**
 
-This PDF contains the **preliminary free-form comparative analysis** conducted during the early phase of the study.
+This PDF contains the preliminary free-form comparative analysis conducted during the early phase of the study.
 It documents exploratory evaluations of AI-generated and human-written code prior to the structured methodology presented in the revised manuscript.
 
-The PDF is included to ensure **transparency and traceability**, allowing readers to see how the initial free-form insights evolved into the final, prompt-structured evaluation used in the published analysis.
+The PDF is included to ensure transparency and traceability, allowing readers to see how the initial free-form insights evolved into the final, prompt-structured evaluation used in the published analysis.
 
 ---
-
-If you want, I can also reorder or rename sections, or make the README more compact or more formal.
